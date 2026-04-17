@@ -1,0 +1,467 @@
+﻿<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Social Posts | Ali Ahmed</title>
+    <meta name="description" content="High-impact static social media posts designed for education and conversion. Curated collection by Ali Ahmed." />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.cdnfonts.com/css/berkeley-mono" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#6b38d4",
+                        "primary-container": "#8455ef",
+                        "secondary": "#006c49",
+                        "background": "#fbf9fa",
+                        "surface": "#fbf9fa",
+                        "on-surface": "#1b1c1d",
+                        "on-surface-variant": "#494454",
+                        "surface-container": "#efedee",
+                        "surface-container-low": "#f5f3f4",
+                        "outline-variant": "#cbc3d7",
+                    },
+                    "borderRadius": { "xl": "0.75rem" },
+                    "fontFamily": {
+                        headline: ["Inter", "sans-serif"],
+                        body: ["Inter", "sans-serif"],
+                        mono: ["Fira Code", "monospace"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        h1, h2, h3, h4, .font-headline, body, p, .font-body { font-family: 'Inter', sans-serif; }
+        .berkeley-mono { font-family: 'Berkeley Mono', monospace; }
+
+        .glass-card {
+            background: rgba(255,255,255,0.4);
+            backdrop-filter: blur(16px);
+            -webkit-
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .glass-tag {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.25);
+            color: #ffffff;
+        }
+        .ethereal-shadow { box-shadow: 0 8px 32px 0 rgba(0,0,0,0.04); }
+        .no-line-rule { border: none !important; }
+
+        .nav-link { position: relative; }
+        .nav-link::after {
+            content:''; position:absolute; bottom:-4px; left:0;
+            width:0; height:2px;
+            background:linear-gradient(90deg,#6b38d4,#8455ef);
+            transition:width 0.3s ease;
+        }
+        .nav-link:hover::after, .nav-link.active::after { width:100%; }
+        .nav-link.active { color:#6b38d4; font-weight:700; }
+
+        .mobile-menu {
+            transform:translateY(-100%);
+            transition:transform 0.4s cubic-bezier(0.16,1,0.3,1);
+        }
+        .mobile-menu.open { transform:translateY(0); }
+
+        @keyframes luxuryFadeUp {
+            from { opacity:0; transform:translateY(60px); }
+            to   { opacity:1; transform:translateY(0); }
+        }
+        .luxury-reveal { opacity:0; will-change:transform,opacity; }
+        .luxury-reveal.active {
+            animation:luxuryFadeUp 1.2s cubic-bezier(0.2,0.8,0.2,1) forwards;
+        }
+
+        .post-card {
+            transition:transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s ease;
+        }
+        .post-card:hover {
+            transform:translateY(-8px);
+            box-shadow:0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .editorial-title { font-family:'Inter',sans-serif; font-weight:900; letter-spacing:-0.04em; }
+
+        @keyframes float-particle {
+            0%,100% { transform:translateY(0) translateX(0); opacity:0; }
+            10% { opacity:0.4; } 90% { opacity:0.4; }
+            50% { transform:translateY(-80px) translateX(20px); }
+        }
+        .floating-particle {
+            position:absolute; width:3px; height:3px;
+            border-radius:50%; background:#6b38d4;
+            pointer-events:none;
+            animation:float-particle var(--duration,4s) var(--delay,0s) ease-in-out infinite;
+        }
+
+        #cursor-glow {
+            position:fixed; width:400px; height:400px; border-radius:50%;
+            background:radial-gradient(circle,rgba(107,56,212,0.08) 0%,rgba(107,56,212,0.02) 40%,transparent 70%);
+            pointer-events:none; z-index:0;
+            transform:translate(-50%,-50%);
+            transition:opacity 0.3s ease; opacity:0;
+            will-change:transform;
+        }
+        #cursor-glow.active { opacity:1; }
+
+        .card-gradient {
+            background:linear-gradient(to top,rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.2) 50%,transparent 100%);
+        }
+    </style>
+
+    </head>
+<body class="bg-background text-on-surface font-body overflow-x-hidden">
+    <div id="cursor-glow"></div>
+
+    <!-- Top Nav -->
+    <nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-6 py-3 rounded-full mt-4 mx-auto w-[90%] max-w-5xl bg-white/60 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(0,0,0,0.04)] no-line-rule transition-all duration-300">
+        <a href="index.html" class="text-lg font-bold tracking-tighter text-slate-900">Ali Ahmed</a>
+        <div class="hidden md:flex items-center gap-8">
+            <a class="nav-link text-slate-600 hover:text-slate-900 font-sans tracking-tight font-medium text-sm transition-all duration-300" href="index.html#work">Work</a>
+            <a class="nav-link active text-slate-900 font-sans tracking-tight font-bold text-sm transition-all duration-300" href="projects.html">Projects</a>
+            <a class="nav-link text-slate-600 hover:text-slate-900 font-sans tracking-tight font-medium text-sm transition-all duration-300" href="index.html#expertise">Expertise</a>
+            <a class="nav-link text-slate-600 hover:text-slate-900 font-sans tracking-tight font-medium text-sm transition-all duration-300" href="index.html#process">Process</a>
+            <a class="nav-link text-slate-600 hover:text-slate-900 font-sans tracking-tight font-medium text-sm transition-all duration-300" href="index.html#experience">Experience</a>
+            <a class="nav-link text-slate-600 hover:text-slate-900 font-sans tracking-tight font-medium text-sm transition-all duration-300" href="index.html#tools">Tools</a>
+            <a class="nav-link text-slate-600 hover:text-slate-900 font-sans tracking-tight font-medium text-sm transition-all duration-300" href="index.html#contact">Contact</a>
+        </div>
+        <button id="mobile-menu-btn" class="md:hidden w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container transition-colors" aria-label="Toggle menu">
+            <span class="material-symbols-outlined">menu</span>
+        </button>
+        <a href="index.html#contact" class="hidden md:inline-block bg-primary hover:opacity-80 text-white px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:scale-105 active:scale-95">Let's Collaborate</a>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu fixed inset-0 z-[60] bg-white/95 backdrop-blur-xl flex flex-col items-center justify-center gap-8 md:hidden">
+        <button id="mobile-menu-close" class="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container transition-colors" aria-label="Close menu">
+            <span class="material-symbols-outlined">close</span>
+        </button>
+        <a class="text-2xl font-bold text-on-surface hover:text-primary transition-colors mobile-nav-link" href="index.html#work">Work</a>
+        <a class="text-2xl font-bold text-on-surface hover:text-primary transition-colors mobile-nav-link" href="projects.html">Projects</a>
+        <a class="text-2xl font-bold text-on-surface hover:text-primary transition-colors mobile-nav-link" href="index.html#expertise">Expertise</a>
+        <a class="text-2xl font-bold text-on-surface hover:text-primary transition-colors mobile-nav-link" href="index.html#process">Process</a>
+        <a class="text-2xl font-bold text-on-surface hover:text-primary transition-colors mobile-nav-link" href="index.html#experience">Experience</a>
+        <a class="text-2xl font-bold text-on-surface hover:text-primary transition-colors mobile-nav-link" href="index.html#tools">Tools</a>
+        <a class="text-2xl font-bold text-on-surface hover:text-primary transition-colors mobile-nav-link" href="index.html#contact">Contact</a>
+        <a href="index.html#contact" class="bg-primary text-white px-8 py-4 rounded-full font-bold text-lg mt-4 hover:opacity-90 transition-all mobile-nav-link">Let's Collaborate</a>
+    </div>
+
+    <!-- Main Content -->
+    <main class="relative pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto overflow-hidden">
+        <div class="floating-particle" style="left:5%;top:15%;--duration:6s;--delay:0s;"></div>
+        <div class="floating-particle" style="left:90%;top:45%;--duration:8s;--delay:1.2s;"></div>
+
+        <!-- Page Header -->
+        <header class="mb-20 luxury-reveal">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
+                <div class="max-w-2xl">
+                    <a href="projects.html" class="inline-flex items-center gap-1.5 text-[10px] uppercase tracking-[0.2em] text-outline mb-4 hover:text-primary transition-colors font-medium">
+                        <span class="material-symbols-outlined text-sm">arrow_back</span>
+                        Projects / Social Posts
+                    </a>
+                    <h1 class="text-5xl md:text-7xl font-black editorial-title text-on-surface">Social Graphics.</h1>
+                    <p class="mt-6 text-lg text-on-surface-variant font-medium leading-relaxed">
+                        High-impact static social media posts designed for education and conversion. Engineered to cut through the noise and drive meaningful engagement.
+                    </p>
+                </div>
+                <div class="flex gap-4 flex-shrink-0">
+                    <span class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant bg-surface-container px-4 py-2 rounded-full">50 Posts</span>
+                    <span class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant bg-surface-container px-4 py-2 rounded-full">Static Archive</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Section Divider -->
+        <div class="flex items-center gap-6 mb-12 luxury-reveal">
+            <h2 class="text-xl font-bold uppercase tracking-[0.1em] text-on-surface whitespace-nowrap">STATIC POSTS GALLERY</h2>
+            <div class="h-[1px] w-full bg-outline-variant/30"></div>
+        </div>
+
+        <!-- Bento Grid â€” 50 cards -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+            <script>
+                const links = [
+                    "https://static.wixstatic.com/media/f361dc_0876077a628e4fde928d7f73eeb0149f~mv2.jpg/v1/fill/w_730,h_548,q_90,enc_avif,quality_auto/f361dc_0876077a628e4fde928d7f73eeb0149f~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_89afff8ecb1449779b566937be3e020e~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_64cd6db16bcd400c9b9faf0d093d342c~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_2428ef084ee54d69bb33d49174f4504a~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_0a57f25433b24d7ba732284a3966b51a~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_b6316daa606c48149dbce956bf617de4~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_61f6c10b0af64cc7a3bd01978c513728~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_3c3ffd4ed9f14e5a8e9ab028b4de97dd~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_41e9729db7a74125bfb5af8a426a161b~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_b832681ea8894fb39bebbdd6114ec1ef~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_1bad79f1b0c248118dbb6582b483363a~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_a5f4d0ddc3704b69aee320a22080d907~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_df701aad6dec472e9ec0c697a99a9194~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_fdadf93faf8949b0acdab3bb1ea292ee~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_68168a6cc079438290dab3327ed2f12f~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_90a7d454a2be45c6a775c4df61c52474~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_befeba58f8db49628587eb5494fcac17~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_c64fa9b6085e4701acd9bbd10f73321e~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_b5c17afc29ff4d55a3a7cd825a88cc70~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_6af819fbc4554889ba1d20fad26c3677~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_ad398bac88b34269b7c6223a80561f2a~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_04d00e1e1b134697972117272550e87c~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_d9a9acdbdac747959c13a12b660b1fb1~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_24a72c8ae45f4fb68dc3d9bd7a8c0e26~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_ca5a9ad87ae34b70af3be773853af99b~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_d8aabd934ff54cadbdf3e5b3000c7a39~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_c00c110ca8f940a49edcff1a6bcce622~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_4db32f87701548668016b11e1bae3d63~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_c506ad3499814e25bcb929d8cfb79833~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_061e963462f0488c891fdb5e6da67114~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_90612cd8d903422ea09d696c8bbc7152~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_660ffae3708a416bad1a2270c8adf42c~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_d8310e6ab51349fbb225bf3cbc62ad44~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_0091b8dcd498413f9482ad4d2ac2513c~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_47099aae4a4a4915abf99b115cd82e8a~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_0fb84ac765b044e0bdfdc768f35b682b~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_edfa2a9d1ee84883ab0040deefbdd8c5~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_95f6f9acf60444ceb7f8966ccdc65c55~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_8c9a8737e46e48468959ba4026740c4b~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_b2a11215ed234ce4be93512d1812f3ad~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_25eab310cad04b8b91161983237f60aa~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_d5746b6edbe5456b9b0d6de02c588ff6~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_2ca546c753934cefacaaee38eb188178~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_6d3d3734a0b9445eb611d19754b0f87d~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_071b77fe45234b70b853bd4e8900aa5c~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_7c60292f94c1482a963f7337fd2722a1~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_a4a5cf0abb9a4d1f8eab8003b13a40c7~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_8089fc17a3f6466fb2069745a9b3c332~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_c14fc61b2e2741278d23e007240ca846~mv2.jpg",
+                    "https://static.wixstatic.com/media/f361dc_4658ca721b914ff8b358acb0ed544e35~mv2.jpg"
+                ];
+
+                const grid = document.currentScript.parentElement;
+                links.forEach((link, i) => {
+                    let cols = "md:col-span-4";
+                    let aspect = "h-[580px]";
+                    
+                    // Add some bento variety
+                    if (i === 0) { cols = "md:col-span-8"; aspect = "h-[580px]"; } // Hero
+                    if (i === 5) { cols = "md:col-span-12"; aspect = "h-[580px]"; } // Banner
+                    if (i === 12) { cols = "md:col-span-6"; aspect = "h-[580px]"; }
+                    if (i === 13) { cols = "md:col-span-6"; aspect = "h-[580px]"; }
+                    if (i === 20) { cols = "md:col-span-8"; aspect = "h-[580px]"; }
+                    if (i === 21) { cols = "md:col-span-4"; aspect = "h-[580px]"; }
+                    if (i === 30) { cols = "md:col-span-12"; aspect = "aspect-[21/7]"; } // Mid Banner
+                    if (i === 40) { cols = "md:col-span-12"; aspect = "h-[580px]"; } // Final Banner
+
+                    const card = `
+                        <div class="${cols} group relative ${aspect} overflow-hidden rounded-3xl bg-surface-container-low ethereal-shadow post-card luxury-reveal" style="cursor:pointer;">
+                            <div class="absolute inset-0 z-0">
+                                <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                    src="${link}" loading="lazy" alt="Social Post ${i+1}"/>
+                            </div>
+                            <div class="absolute inset-0 bg-black/5 group-hover:bg-black/25 transition-all duration-500"></div>
+                            <div class="absolute inset-0 flex items-center justify-center z-20 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <div class="glass-card w-12 h-12 rounded-full flex items-center justify-center shadow-xl">
+                                    <span class="material-symbols-outlined text-white text-2xl">zoom_in</span>
+                                </div>
+                            </div>
+                            <div class="absolute top-6 right-6 z-30 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <button class="glass-card p-2 rounded-xl text-white hover:bg-white/20 transition-all card-share-btn"><span class="material-symbols-outlined text-lg">share</span></button>
+                                <button class="glass-card p-2 rounded-xl text-white hover:bg-white/20 transition-all card-download-btn"><span class="material-symbols-outlined text-lg">download</span></button>
+                            </div>
+                            <div class="absolute bottom-0 left-0 right-0 p-6 z-10 card-gradient opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <span class="berkeley-mono text-[9px] uppercase tracking-widest text-white/60 block mb-1">Graphic Post</span>
+                                <h3 class="text-lg font-black editorial-title text-white">Post ${String(i+1).padStart(2, '0')}</h3>
+                            </div>
+                        </div>
+                    `;
+                    grid.insertAdjacentHTML('beforeend', card);
+                });
+            </script>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-50 py-12 px-8 no-line-rule mt-24">
+        <div class="flex flex-col md:flex-row justify-between items-center w-full max-w-7xl mx-auto px-8 md:px-12 lg:px-20">
+            <div class="mb-8 md:mb-0">
+                <div class="text-sm font-black text-slate-900 mb-2">Ali Ahmed</div>
+                <p class="font-mono text-[10px] uppercase tracking-widest text-slate-500">Â© 2024 Ali Ahmed. Built with intentionality.</p>
+            </div>
+            <div class="flex gap-8">
+                <a class="font-mono text-[10px] uppercase tracking-widest text-slate-500 hover:text-slate-900 hover:translate-y-[-2px] transition-all duration-300" href="https://www.linkedin.com/in/aliahmeddigital/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a class="font-mono text-[10px] uppercase tracking-widest text-slate-500 hover:text-slate-900 hover:translate-y-[-2px] transition-all duration-300" href="https://www.instagram.com/ahmedandai/" target="_blank" rel="noopener noreferrer">Instagram</a>
+                <a class="font-mono text-[10px] uppercase tracking-widest text-slate-500 hover:text-slate-900 hover:translate-y-[-2px] transition-all duration-300" href="projects.html">Projects</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Glass Image Modal -->
+    <div id="image-modal" class="fixed inset-0 z-[99999] opacity-0 pointer-events-none transition-all duration-500">
+        <div class="fixed inset-0 w-full h-full" style="background:rgba(255,255,255,0.12);backdrop-filter:blur(40px) saturate(1.4);-webkit-backdrop-filter:blur(40px) saturate(1.4);"></div>
+        <div class="absolute inset-0 w-full h-full flex items-center justify-center">
+            <button id="image-modal-close" class="absolute top-6 right-6 w-11 h-11 rounded-full flex items-center justify-center transition-all z-20 hover:scale-110 hover:rotate-90 duration-300" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);" aria-label="Close">
+                <span class="material-symbols-outlined text-white text-xl">close</span>
+            </button>
+            <div class="relative w-full max-w-4xl mx-auto px-4 select-none">
+                <div class="relative rounded-[1.5rem] overflow-hidden shadow-[0_0_80px_rgba(107,56,212,0.2),0_20px_60px_rgba(0,0,0,0.3)]" style="border:1px solid rgba(255,255,255,0.2);">
+                    <img loading="lazy" id="modal-image" class="w-full block" style="max-height:85vh;object-fit:contain;background:#000;" src="" alt="Full view"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const imageModal = document.getElementById('image-modal');
+        const modalImage = document.getElementById('modal-image');
+        const imageModalClose = document.getElementById('image-modal-close');
+        
+        window.openImageModal = (src) => {
+            modalImage.src = src;
+            imageModal.classList.remove('opacity-0','pointer-events-none');
+            imageModal.classList.add('opacity-100','pointer-events-auto');
+            document.body.style.overflow = 'hidden';
+        };
+
+        const closeImageModal = () => {
+            imageModal.classList.add('opacity-0','pointer-events-none');
+            imageModal.classList.remove('opacity-100','pointer-events-auto');
+            document.body.style.overflow = '';
+            setTimeout(() => { modalImage.src = ''; }, 500);
+        };
+
+        if (imageModalClose) imageModalClose.addEventListener('click', closeImageModal);
+        imageModal.addEventListener('click', e => { if (e.target === imageModal || e.target.classList.contains('fixed')) closeImageModal(); });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeImageModal(); });
+
+        // Delegation for dynamic cards
+        document.addEventListener('click', e => {
+            const card = e.target.closest('.post-card');
+            if (card && !e.target.closest('button')) {
+                const img = card.querySelector('img');
+                if (img) window.openImageModal(img.src);
+            }
+        });
+
+        // Share & Download for images
+        const setupInteractions = () => {
+            document.addEventListener('click', async e => {
+                const shareBtn = e.target.closest('.card-share-btn');
+                const downloadBtn = e.target.closest('.card-download-btn');
+                
+                if (shareBtn) {
+                    e.stopPropagation();
+                    const card = shareBtn.closest('.post-card');
+                    const img = card.querySelector('img');
+                    const url = img ? img.src : window.location.href;
+                    if (navigator.share) {
+                        try { await navigator.share({ title: 'Check out this post', url: url }); } catch (err) {}
+                    } else {
+                        try {
+                            await navigator.clipboard.writeText(url);
+                            const icon = shareBtn.querySelector('.material-symbols-outlined');
+                            const original = icon.textContent;
+                            icon.textContent = 'check';
+                            setTimeout(() => icon.textContent = original, 2000);
+                        } catch (err) { window.open(url, '_blank'); }
+                    }
+                }
+
+                if (downloadBtn) {
+                    e.stopPropagation();
+                    const card = downloadBtn.closest('.post-card');
+                    const img = card.querySelector('img');
+                    if (!img || !img.src) return;
+                    const url = img.src;
+                    const filename = url.split('/').pop().split('?')[0] || 'post.jpg';
+                    try {
+                        const res = await fetch(url);
+                        const blob = await res.blob();
+                        const blobUrl = window.URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = blobUrl;
+                        a.download = filename;
+                        document.body.appendChild(a);
+                        a.click();
+                        setTimeout(() => { document.body.removeChild(a); window.URL.revokeObjectURL(blobUrl); }, 100);
+                    } catch (err) { window.open(url, '_blank'); }
+                }
+            });
+        };
+        setupInteractions();
+
+        // Reveal Animations
+        (function() {
+            const obs = new IntersectionObserver(entries => {
+                let delay = 0;
+                entries.forEach(e => {
+                    if (e.isIntersecting && !e.target.classList.contains('active')) {
+                        setTimeout(() => { e.target.classList.add('active'); }, delay);
+                        delay += 50;
+                        obs.unobserve(e.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            // Wait for script to generate cards
+            setTimeout(() => {
+                document.querySelectorAll('.luxury-reveal').forEach(el => obs.observe(el));
+            }, 100);
+        })();
+
+        // Mobile Menu
+        const mmb = document.getElementById('mobile-menu-btn');
+        const mmc = document.getElementById('mobile-menu-close');
+        const mm = document.getElementById('mobile-menu');
+        const mnl = document.querySelectorAll('.mobile-nav-link');
+        if (mmb && mm) mmb.addEventListener('click', () => { mm.classList.add('open'); document.body.style.overflow = 'hidden'; });
+        if (mmc && mm) {
+            const cl = () => { mm.classList.remove('open'); document.body.style.overflow = ''; };
+            mmc.addEventListener('click', cl);
+            mnl.forEach(l => l.addEventListener('click', cl));
+        }
+
+        // Cursor Glow
+        const cg = document.getElementById('cursor-glow');
+        if (cg) {
+            let mx = 0, my = 0, gx = 0, gy = 0;
+            document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cg.classList.add('active'); });
+            const tick = () => {
+                gx += (mx - gx) * 0.1; gy += (my - gy) * 0.1;
+                cg.style.left = gx + 'px'; cg.style.top = gy + 'px';
+                requestAnimationFrame(tick);
+            };
+            tick();
+        }
+    
+        // Mobile Menu Event Listeners (Injected via QA script)
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+        
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            });
+        }
+        
+        if (mobileMenuClose && mobileMenu) {
+            const close = () => {
+                mobileMenu.classList.remove('open');
+                document.body.style.overflow = '';
+            };
+            mobileMenuClose.addEventListener('click', close);
+            mobileNavLinks.forEach(l => l.addEventListener('click', close));
+        }
+</script>
+</body>
+</html>
+
+

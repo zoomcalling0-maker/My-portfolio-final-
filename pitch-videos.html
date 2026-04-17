@@ -1,0 +1,379 @@
+﻿<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Client Pitch Videos | Ali Ahmed</title>
+    <meta name="description" content="A curated collection of persuasive high-stakes client pitch videos. Engineered for conviction and clarity by Ali Ahmed." />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.cdnfonts.com/css/berkeley-mono" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#6b38d4",
+                        "primary-container": "#8455ef",
+                        "secondary": "#006c49",
+                        "background": "#fbf9fa",
+                        "surface": "#fbf9fa",
+                        "on-surface": "#1b1c1d",
+                        "on-surface-variant": "#494454",
+                        "surface-container": "#efedee",
+                        "surface-container-low": "#f5f3f4",
+                        "outline-variant": "#cbc3d7",
+                    },
+                    "borderRadius": {
+                        "xl": "0.75rem",
+                    },
+                    "fontFamily": {
+                        headline: ["Inter", "sans-serif"],
+                        body: ["Inter", "sans-serif"],
+                        mono: ["Fira Code", "monospace"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        h1, h2, h3, h4, .font-headline, body, p, .font-body {
+            font-family: 'Inter', sans-serif;
+        }
+        .berkeley-mono { font-family: 'Berkeley Mono', monospace; }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .glass-tag {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: #ffffff;
+        }
+        .ethereal-shadow {
+            box-shadow: 0 8px 32px 0 rgba(0,0,0,0.04);
+        }
+        .no-line-rule { border: none !important; }
+
+        /* Nav links */
+        .nav-link { position: relative; }
+        .nav-link::after {
+            content: ''; position: absolute; bottom: -4px; left: 0;
+            width: 0; height: 2px;
+            background: linear-gradient(90deg, #6b38d4, #8455ef);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+        .nav-link.active { color: #6b38d4; font-weight: 700; }
+
+        /* Mobile menu */
+        .mobile-menu {
+            transform: translateY(-100%);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .mobile-menu.open { transform: translateY(0); }
+
+        /* Entrance animation */
+        @keyframes luxuryFadeUp {
+            from { opacity: 0; transform: translateY(60px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .luxury-reveal { opacity: 0; will-change: transform, opacity; }
+        .luxury-reveal.active {
+            animation: luxuryFadeUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        /* Reel card */
+        .reel-card {
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+        }
+        .reel-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        /* Editorial title */
+        .editorial-title {
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            letter-spacing: -0.04em;
+        }
+
+        /* Floating particles */
+        @keyframes float-particle {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 0.4; }
+            90% { opacity: 0.4; }
+            50% { transform: translateY(-80px) translateX(20px); }
+        }
+        .floating-particle {
+            position: absolute;
+            width: 3px; height: 3px;
+            border-radius: 50%;
+            background: #6b38d4;
+            pointer-events: none;
+            animation: float-particle var(--duration, 4s) var(--delay, 0s) ease-in-out infinite;
+        }
+
+        /* Cursor glow */
+        #cursor-glow {
+            position: fixed; width: 400px; height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(107,56,212,0.08) 0%, rgba(107,56,212,0.02) 40%, transparent 70%);
+            pointer-events: none; z-index: 0;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s ease; opacity: 0;
+            will-change: transform;
+        }
+        #cursor-glow.active { opacity: 1; }
+
+        /* Card gradient overlay */
+        .card-gradient {
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 50%, transparent 100%);
+        }
+    </style>
+
+    </head>
+<body class="bg-background text-on-surface font-body overflow-x-hidden">
+    <div id="cursor-glow"></div>
+
+    <!-- Top Nav -->
+    <nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-6 py-3 rounded-full mt-4 mx-auto w-[90%] max-w-5xl bg-white/60 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(0,0,0,0.04)] no-line-rule transition-all duration-300">
+        <a href="index.html" class="text-lg font-bold tracking-tighter text-slate-900">Ali Ahmed</a>
+        <div class="hidden md:flex items-center gap-8">
+            <a class="nav-link text-slate-600 hover:text-slate-900 font-sans tracking-tight font-medium text-sm transition-all duration-300" href="index.html#work">Work</a>
+            <a class="nav-link active text-slate-900 font-sans tracking-tight font-bold text-sm transition-all duration-300" href="projects.html">Projects</a>
+            <a class="nav-link text-slate-600 hover:text-slate-900 font-sans tracking-tight font-medium text-sm transition-all duration-300" href="index.html#expertise">Expertise</a>
+            <a class="nav-link text-slate-600 hover:text-slate-900 font-sans tracking-tight font-medium text-sm transition-all duration-300" href="index.html#process">Process</a>
+            <a class="nav-link text-slate-600 hover:text-slate-900 font-sans tracking-tight font-medium text-sm transition-all duration-300" href="index.html#experience">Experience</a>
+            <a class="nav-link text-slate-600 hover:text-slate-900 font-sans tracking-tight font-medium text-sm transition-all duration-300" href="index.html#tools">Tools</a>
+            <a class="nav-link text-slate-600 hover:text-slate-900 font-sans tracking-tight font-medium text-sm transition-all duration-300" href="index.html#contact">Contact</a>
+        </div>
+        <button id="mobile-menu-btn" class="md:hidden w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container transition-colors" aria-label="Toggle menu">
+            <span class="material-symbols-outlined">menu</span>
+        </button>
+        <a href="index.html#contact" class="hidden md:inline-block bg-primary hover:opacity-80 text-white px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:scale-105 active:scale-95">Let's Collaborate</a>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu fixed inset-0 z-[60] bg-white/95 backdrop-blur-xl flex flex-col items-center justify-center gap-8 md:hidden">
+        <button id="mobile-menu-close" class="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container transition-colors" aria-label="Close menu">
+            <span class="material-symbols-outlined">close</span>
+        </button>
+        <a class="text-2xl font-bold text-on-surface hover:text-primary transition-colors mobile-nav-link" href="index.html#work">Work</a>
+        <a class="text-2xl font-bold text-on-surface hover:text-primary transition-colors mobile-nav-link" href="projects.html">Projects</a>
+        <a class="text-2xl font-bold text-on-surface hover:text-primary transition-colors mobile-nav-link" href="index.html#expertise">Expertise</a>
+        <a class="text-2xl font-bold text-on-surface hover:text-primary transition-colors mobile-nav-link" href="index.html#process">Process</a>
+        <a class="text-2xl font-bold text-on-surface hover:text-primary transition-colors mobile-nav-link" href="index.html#experience">Experience</a>
+        <a class="text-2xl font-bold text-on-surface hover:text-primary transition-colors mobile-nav-link" href="index.html#tools">Tools</a>
+        <a class="text-2xl font-bold text-on-surface hover:text-primary transition-colors mobile-nav-link" href="index.html#contact">Contact</a>
+        <a href="index.html#contact" class="bg-primary text-white px-8 py-4 rounded-full font-bold text-lg mt-4 hover:opacity-90 transition-all mobile-nav-link">Let's Collaborate</a>
+    </div>
+
+    <!-- Main Content -->
+    <main class="relative pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto overflow-hidden">
+        <div class="floating-particle" style="left: 10%; top: 30%; --duration: 5s; --delay: 0s;"></div>
+        <div class="floating-particle" style="left: 85%; top: 50%; --duration: 6s; --delay: 0.5s;"></div>
+
+        <!-- Page Header -->
+        <header class="mb-20 luxury-reveal">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
+                <div class="max-w-2xl">
+                    <!-- Breadcrumb -->
+                    <a href="projects.html" class="inline-flex items-center gap-1.5 text-[10px] uppercase tracking-[0.2em] text-outline mb-4 hover:text-primary transition-colors font-medium">
+                        <span class="material-symbols-outlined text-sm">arrow_back</span>
+                        Projects / Client Pitch Videos
+                    </a>
+                    <h1 class="text-5xl md:text-7xl font-black editorial-title text-on-surface">Pitch Perfection.</h1>
+                    <p class="mt-6 text-lg text-on-surface-variant font-medium leading-relaxed">
+                        A collection of high-stakes pitch videos designed to win clients, secure funding, and articulate vision with unshakeable conviction.
+                    </p>
+                </div>
+                <div class="flex gap-4 flex-shrink-0">
+                    <span class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant bg-surface-container px-4 py-2 rounded-full">2 Featured</span>
+                    <span class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant bg-surface-container px-4 py-2 rounded-full">High Stakes</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Section divider -->
+        <div class="flex items-center gap-6 mb-12 luxury-reveal">
+            <h2 class="text-xl font-bold uppercase tracking-[0.1em] text-on-surface whitespace-nowrap">SELECTED PITCHES</h2>
+            <div class="h-[1px] w-full bg-outline-variant/30"></div>
+        </div>
+
+        <!-- Bento Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <!-- Card 1 -->
+            <div class="group relative aspect-video overflow-hidden rounded-3xl bg-surface-container-low ethereal-shadow reel-card luxury-reveal" style="cursor:pointer;">
+                <div class="absolute inset-0 z-0">
+                    <video preload="metadata" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 hover-play"
+                        src="https://video.wixstatic.com/video/f361dc_2229bbde7b8545c9a7eebaf9ae548012/1080p/mp4/file.mp4#t=0.001"
+                        loop muted playsinline></video>
+                </div>
+                <div class="absolute inset-0 bg-black/5 group-hover:bg-black/25 transition-all duration-500"></div>
+                <!-- Play icon -->
+                <div class="absolute inset-0 flex items-center justify-center z-20 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div class="glass-card w-16 h-16 rounded-full flex items-center justify-center shadow-xl">
+                        <span class="material-symbols-outlined text-white text-3xl" style="font-variation-settings:'FILL' 1">play_arrow</span>
+                    </div>
+                </div>
+                <div class="absolute top-6 left-6 z-30">
+                    <span class="glass-tag text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">Client Pitch</span>
+                </div>
+                <div class="absolute bottom-0 left-0 right-0 p-8 z-10 card-gradient">
+                    <h3 class="text-2xl font-black editorial-title text-white mb-1">Vision Narrative</h3>
+                    <p class="text-white/70 text-sm font-medium">Concept presentation & brand strategy</p>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="group relative aspect-video overflow-hidden rounded-3xl bg-surface-container-low ethereal-shadow reel-card luxury-reveal" style="cursor:pointer;">
+                <div class="absolute inset-0 z-0">
+                    <video preload="metadata" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 hover-play"
+                        src="https://video.wixstatic.com/video/f361dc_eca0cef799924fec8951d02b0d9aec66/1080p/mp4/file.mp4#t=0.001"
+                        loop muted playsinline></video>
+                </div>
+                <div class="absolute inset-0 bg-black/5 group-hover:bg-black/25 transition-all duration-500"></div>
+                <div class="absolute inset-0 flex items-center justify-center z-20 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div class="glass-card w-16 h-16 rounded-full flex items-center justify-center shadow-xl">
+                        <span class="material-symbols-outlined text-white text-3xl" style="font-variation-settings:'FILL' 1">play_arrow</span>
+                    </div>
+                </div>
+                <div class="absolute top-6 left-6 z-30">
+                    <span class="glass-tag text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">Pitch Strategy</span>
+                </div>
+                <div class="absolute bottom-0 left-0 right-0 p-8 z-10 card-gradient">
+                    <h3 class="text-2xl font-black editorial-title text-white mb-1">Growth Roadmap</h3>
+                    <p class="text-white/70 text-sm font-medium">Strategic pitch for market expansion</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-50 py-12 px-8 no-line-rule mt-24">
+        <div class="flex flex-col md:flex-row justify-between items-center w-full max-w-7xl mx-auto px-8 md:px-12 lg:px-20">
+            <div class="mb-8 md:mb-0">
+                <div class="text-sm font-black text-slate-900 mb-2">Ali Ahmed</div>
+                <p class="font-mono text-[10px] uppercase tracking-widest text-slate-500">Â© 2024 Ali Ahmed. Built with intentionality.</p>
+            </div>
+            <div class="flex gap-8">
+                <a class="font-mono text-[10px] uppercase tracking-widest text-slate-500 hover:text-slate-900 transition-all duration-300" href="https://www.linkedin.com/in/aliahmeddigital/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a class="font-mono text-[10px] uppercase tracking-widest text-slate-500 hover:text-slate-900 transition-all duration-300" href="https://www.instagram.com/ahmedandai/" target="_blank" rel="noopener noreferrer">Instagram</a>
+                <a class="font-mono text-[10px] uppercase tracking-widest text-slate-500 hover:text-slate-900 transition-all duration-300" href="projects.html">Projects</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Video Modal -->
+    <div id="video-modal" class="fixed inset-0 z-[99999] opacity-0 pointer-events-none transition-all duration-500">
+        <div class="fixed inset-0 w-full h-full bg-white/10 backdrop-blur-3xl saturate-150"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4">
+            <button id="close-modal" class="absolute top-6 right-6 w-12 h-12 rounded-full flex items-center justify-center bg-white/10 border border-white/20 text-white hover:scale-110 transition-all z-50">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            <div class="relative w-full max-w-5xl aspect-video rounded-3xl overflow-hidden shadow-2xl border border-white/20">
+                <video preload="metadata" id="modal-video" class="w-full h-full object-cover" controls playsinline></video>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Modal Logic
+        const modal = document.getElementById('video-modal');
+        const modalVid = document.getElementById('modal-video');
+        const closeBtn = document.getElementById('close-modal');
+
+        document.querySelectorAll('.reel-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const src = card.querySelector('video').src;
+                modalVid.src = src;
+                modal.classList.remove('opacity-0', 'pointer-events-none');
+                modalVid.play();
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        const closeModal = () => {
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modalVid.pause();
+            modalVid.src = '';
+            document.body.style.overflow = '';
+        };
+
+        if(closeBtn) closeBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', e => { if(e.target === modal || e.target.classList.contains('fixed')) closeModal(); });
+
+        // Hover Play
+        document.querySelectorAll('.hover-play').forEach(vid => {
+            const group = vid.closest('.group');
+            group.addEventListener('mouseenter', () => vid.play());
+            group.addEventListener('mouseleave', () => vid.pause());
+        });
+
+        // Reveal
+        (function() {
+            const els = document.querySelectorAll('.luxury-reveal');
+            let queue = [], processing = false;
+            const process = () => {
+                if (!queue.length) { processing = false; return; }
+                processing = true;
+                queue.shift().classList.add('active');
+                setTimeout(process, 150);
+            };
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !entry.target.classList.contains('active')) {
+                        if (!queue.includes(entry.target)) { queue.push(entry.target); if (!processing) process(); }
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            els.forEach(el => observer.observe(el));
+        })();
+
+        // Cursor Glow
+        const cursorGlow = document.getElementById('cursor-glow');
+        if (cursorGlow) {
+            let mX = 0, mY = 0, gX = 0, gY = 0;
+            document.addEventListener('mousemove', e => { mX = e.clientX; mY = e.clientY; cursorGlow.classList.add('active'); });
+            let lastGX = -1, lastGY = -1; const tick = () => { let dX = mX - gX; let dY = mY - gY; if (Math.abs(dX) > 0.1 || Math.abs(dY) > 0.1) { gX += dX * 0.1; gY += dY * 0.1; let roundedX = Math.round(gX * 10) / 10; let roundedY = Math.round(gY * 10) / 10; if (roundedX !== lastGX || roundedY !== lastGY) { cursorGlow.style.transform = `translate3d(calc(${roundedX}px - 50%), calc(${roundedY}px - 50%), 0)`; lastGX = roundedX; lastGY = roundedY; } } requestAnimationFrame(tick); };
+            tick();
+        }
+    
+        // Mobile Menu Event Listeners (Injected via QA script)
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+        
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            });
+        }
+        
+        if (mobileMenuClose && mobileMenu) {
+            const close = () => {
+                mobileMenu.classList.remove('open');
+                document.body.style.overflow = '';
+            };
+            mobileMenuClose.addEventListener('click', close);
+            mobileNavLinks.forEach(l => l.addEventListener('click', close));
+        }
+</script>
+</body>
+</html>
+
+

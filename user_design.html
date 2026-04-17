@@ -1,0 +1,245 @@
+﻿<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+    <link rel="icon" type="image/png" href="favicon.png" />
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&amp;family=Berkeley+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-container": "#8455ef",
+                    "on-secondary-container": "#00714d",
+                    "outline": "#7b7486",
+                    "on-surface-variant": "#494454",
+                    "tertiary-fixed-dim": "#ffb3af",
+                    "primary": "#6b38d4",
+                    "surface-tint": "#6d3bd7",
+                    "inverse-primary": "#d0bcff",
+                    "primary-fixed": "#e9ddff",
+                    "secondary-fixed": "#6ffbbe",
+                    "primary-fixed-dim": "#d0bcff",
+                    "error": "#ba1a1a",
+                    "surface-bright": "#fbf9fa",
+                    "on-secondary-fixed-variant": "#005236",
+                    "surface-container-lowest": "#ffffff",
+                    "outline-variant": "#cbc3d7",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed-variant": "#5516be",
+                    "on-error": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "surface": "#fbf9fa",
+                    "surface-container-high": "#e9e8e9",
+                    "on-error-container": "#93000a",
+                    "secondary-fixed-dim": "#4edea3",
+                    "surface-dim": "#dbd9db",
+                    "surface-container": "#efedee",
+                    "surface-container-low": "#f5f3f4",
+                    "on-tertiary-fixed": "#410005",
+                    "tertiary": "#ad292f",
+                    "secondary-container": "#6cf8bb",
+                    "surface-container-highest": "#e3e2e3",
+                    "on-primary": "#ffffff",
+                    "tertiary-container": "#cf4244",
+                    "surface-variant": "#e3e2e3",
+                    "background": "#fbf9fa",
+                    "inverse-on-surface": "#f2f0f1",
+                    "on-tertiary": "#ffffff",
+                    "inverse-surface": "#303032",
+                    "on-primary-container": "#fffbff",
+                    "on-surface": "#1b1c1d",
+                    "on-primary-fixed": "#23005c",
+                    "on-tertiary-fixed-variant": "#8e101c",
+                    "on-background": "#1b1c1d",
+                    "secondary": "#006c49",
+                    "on-secondary-fixed": "#002113",
+                    "tertiary-fixed": "#ffdad7",
+                    "on-tertiary-container": "#fffbff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Inter"],
+                    "body": ["Inter"],
+                    "label": ["Berkeley Mono"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .ethereal-shadow {
+            box-shadow: 0 8px 32px 0 rgba(0,0,0,0.04);
+        }
+        .editorial-title {
+            letter-spacing: -0.04em;
+        }
+    
+        .card-gradient {
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
+        }
+
+    </style>
+
+    </head>
+<body class="bg-surface text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed overflow-x-hidden">
+<!-- TopNavBar Navigation Shell -->
+<nav class="fixed top-0 w-full z-50 bg-white/60 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(0,0,0,0.04)] flex justify-between items-center px-8 h-20">
+<div class="text-xl font-black tracking-tighter text-slate-900">Aether AI</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-['Inter'] font-bold tracking-tight text-slate-500 hover:text-slate-900 transition-all duration-300" href="#">Archive</a>
+<a class="font-['Inter'] font-bold tracking-tight text-violet-600 border-b-2 border-violet-600 pb-1" href="#">Motion</a>
+<a class="font-['Inter'] font-bold tracking-tight text-slate-500 hover:text-slate-900 transition-all duration-300" href="#">Process</a>
+<a class="font-['Inter'] font-bold tracking-tight text-slate-500 hover:text-slate-900 transition-all duration-300" href="#">About</a>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-lg font-bold hover:scale-95 active:scale-90 transition-all duration-200">
+            Connect
+        </button>
+</nav>
+<!-- Main Content Canvas -->
+<main class="pt-32 pb-24 px-8 max-w-7xl mx-auto min-h-screen">
+<!-- Page Header -->
+<header class="mb-20">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
+<div class="max-w-2xl">
+<span class="font-label text-[10px] uppercase tracking-[0.2em] text-outline mb-4 block">Archive 2024 / Categories</span>
+<h1 class="text-5xl md:text-7xl font-black editorial-title text-on-surface">Curated Motion.</h1>
+<p class="mt-6 text-lg text-on-surface-variant font-medium leading-relaxed">
+                        A collection of cinematic experiences defined by precision, rhythm, and visual storytelling. Explore the spectrum of Aether AIâ€™s creative output.
+                    </p>
+</div>
+<div class="flex gap-4">
+<span class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant bg-surface-container px-4 py-2 rounded-full">6 Series</span>
+<span class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant bg-surface-container px-4 py-2 rounded-full">Selected Works</span>
+</div>
+</div>
+</header>
+<!-- Category Grid: Asymmetric Bento Influence -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+<!-- Category Card 1: AI Viral Reels (Large) -->
+<div class="group relative md:col-span-8 h-[500px] overflow-hidden rounded-xl bg-surface-container-low ethereal-shadow">
+<div class="absolute inset-0 z-0">
+<img loading="lazy" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="abstract digital waves of violet and silver light flowing smoothly in a dark void representing high-end AI computation and motion" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCK5sujt0p0fY2VePq330MObdlsLVRGcWOCNO7hX0WYzVaLjkp4Er7em_uPe1FhOSZfR6pKkHG3VhPvY4WN6zkftSPBGlLLSDgD_TMRsGzLh7C3Ekhg0GWaMCz6qVn-07AUeJJRh7kQH947yokWInldaUm5mi0qmU0ehqMMo0xowWKSNB-oUaPqQWmywXt_UILFTQ2kS3SsbrMEsGMHNyINt1N9YnNdgPrFu5s-V3AMWuc2B4aInG9locLVSfucgGBbeR_fClJ-l1I"/>
+</div>
+<!-- Glassmorphic Overlay -->
+<div class="absolute inset-0 bg-black/10 group-hover:bg-white/20 transition-all duration-500 backdrop-blur-0 group-hover:backdrop-blur-md flex items-center justify-center">
+<button class="opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 bg-white text-on-surface px-8 py-3 rounded-lg font-bold text-sm tracking-tight flex items-center gap-2">
+                        View Project <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<!-- Content Information -->
+<div class="absolute bottom-0 left-0 p-10 z-10 text-white pointer-events-none">
+<span class="font-label text-[10px] uppercase tracking-widest text-white/70 mb-2 block">Experimental</span>
+<h3 class="text-4xl font-black editorial-title">AI Viral Reels</h3>
+</div>
+</div>
+<!-- Category Card 2: Startup Explainers -->
+<div class="group relative md:col-span-4 h-[500px] overflow-hidden rounded-xl bg-surface-container-low ethereal-shadow">
+<div class="absolute inset-0 z-0">
+<img loading="lazy" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="minimalist modern office interior with soft natural light coming through large windows reflecting on clean white surfaces and glass" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnzHnszNieSRCAiBHOGDQ_vAnGaq7pKUP1jiUOK2tNMxEZw-Hz582zjyi77v3Y5ZYJL6OYwYA1nnuo02Sta9JW499WwsU_AN0sUZkbhTdYtylrqif_9Rprh7qxHDIXd0_7S53-EzLM_XvUcBZsTAzlnwf_eHUWYgZuAw1nxZ3XgmZ5Qsv5rp-zHGYNeLCgdHKdd2qfEDWqKBnIiOPr1SPRfZiK53casnd4EK8U6EiOIvGSp4sbCnir1Y5tRNuGk62Lq8abGvrEiOo"/>
+</div>
+<div class="absolute inset-0 bg-black/10 group-hover:bg-white/20 transition-all duration-500 backdrop-blur-0 group-hover:backdrop-blur-md flex items-center justify-center">
+<button class="opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 bg-white text-on-surface px-8 py-3 rounded-lg font-bold text-sm tracking-tight flex items-center gap-2">
+                        View More <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<div class="absolute bottom-0 left-0 p-10 z-10 text-white pointer-events-none">
+<span class="font-label text-[10px] uppercase tracking-widest text-white/70 mb-2 block">B2B SaaS</span>
+<h3 class="text-3xl font-black editorial-title">Startup Explainers</h3>
+</div>
+</div>
+<!-- Category Card 3: Commercial Campaigns -->
+<div class="group relative md:col-span-5 h-[400px] overflow-hidden rounded-xl bg-surface-container-low ethereal-shadow">
+<div class="absolute inset-0 z-0">
+<img loading="lazy" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="cinematic close-up of high-end mechanical components and electronics with neon blue accents and shallow depth of field" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCmZHYah9H3ij1imbyBwSPewPmoX5jWdKXL4mpTzeiwvYyxKxud-ZX5bxAexSVmRbomjeHYWh2qpmIxG2A02Ol299PDw7OAY3UOZJS5DiUy8euRmFfCLrxAfoCcSE_kX2e73kYRwdzIz9cKidVtCwwVbjUNtHtFb3hLB_ae5H_LyfrlVLYh6rD-A8qtf82XhATxsEtkyor8kxx0WO5_nCsLsAvqrYMbAPrZzydpwovE4GoAw0lbM2qkeN4c1FRPEtixayymNJXKrA"/>
+</div>
+<div class="absolute inset-0 bg-black/10 group-hover:bg-white/20 transition-all duration-500 backdrop-blur-0 group-hover:backdrop-blur-md flex items-center justify-center">
+<button class="opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 bg-white text-on-surface px-8 py-3 rounded-lg font-bold text-sm tracking-tight flex items-center gap-2">
+                        View More <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<div class="absolute bottom-0 left-0 p-10 z-10 text-white pointer-events-none">
+<span class="font-label text-[10px] uppercase tracking-widest text-white/70 mb-2 block">Global Brands</span>
+<h3 class="text-3xl font-black editorial-title">Commercial Campaigns</h3>
+</div>
+</div>
+<!-- Category Card 4: Creative Short Films -->
+<div class="group relative md:col-span-7 h-[400px] overflow-hidden rounded-xl bg-surface-container-low ethereal-shadow">
+<div class="absolute inset-0 z-0">
+<img loading="lazy" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="moody cinematic landscape at dusk with a lone figure silhouetted against a deep indigo and orange twilight sky" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdR9mYp0tLnMm8hoVQqjdP01Hu8Xl4klgOp4wC7sWbhxrF2ZNJq8_RTIZT2_nTbJfsR0cZ_7jRIAh8QdLGEyh7sb2lmH6oPuCRFZxzw_PckHqdK6ntoaG6nhY_pPDnWMPLnEv25fNogXi_yWCW-ErsCodyajUcR81a3ZAF5pgIT7rvS1VQ0N31N6H8FKmwt8YzoGH6OIR8KNit0cJNpNsw9Od-3R1gHOSNC60lyxv0IqwXxy-EJo_6vLemRkIY3J3TnMvx8lWcMkk"/>
+</div>
+<div class="absolute inset-0 bg-black/10 group-hover:bg-white/20 transition-all duration-500 backdrop-blur-0 group-hover:backdrop-blur-md flex items-center justify-center">
+<button class="opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 bg-white text-on-surface px-8 py-3 rounded-lg font-bold text-sm tracking-tight flex items-center gap-2">
+                        View More <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<div class="absolute bottom-0 left-0 p-10 z-10 text-white pointer-events-none">
+<span class="font-label text-[10px] uppercase tracking-widest text-white/70 mb-2 block">Cinematic Narrative</span>
+<h3 class="text-3xl font-black editorial-title">Creative Short Films</h3>
+</div>
+</div>
+<!-- Category Card 5: Social Media Strategy -->
+<div class="group relative md:col-span-7 h-[400px] overflow-hidden rounded-xl bg-surface-container-low ethereal-shadow">
+<div class="absolute inset-0 z-0">
+<img loading="lazy" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Vibrant cinematic capture of glowing holographic interface elements floating in a modern studio environment, representing dynamic social media engagement and viral content strategy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDT-C7Q5kX8mN2fP4z9v-v-Z0l9v6m-n8l7k6j5h4g3f2e1d0c9b8a7z6y5x4w3v2u1t0s9r8q7p6o5n4m3l2k1j0"/>
+</div>
+<div class="absolute inset-0 bg-black/10 group-hover:bg-white/20 transition-all duration-500 backdrop-blur-0 group-hover:backdrop-blur-md flex items-center justify-center">
+<button class="opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 bg-white text-on-surface px-8 py-3 rounded-lg font-bold text-sm tracking-tight flex items-center gap-2">
+                        View More <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<div class="absolute bottom-0 left-0 p-10 z-10 text-white pointer-events-none">
+<span class="font-label text-[10px] uppercase tracking-widest text-white/70 mb-2 block">Engagement Focus</span>
+<h3 class="text-3xl font-black editorial-title">Social Media Strategy</h3>
+</div>
+</div>
+<!-- Category Card 6: B2B Marketing Systems -->
+<div class="group relative md:col-span-5 h-[400px] overflow-hidden rounded-xl bg-surface-container-low ethereal-shadow">
+<div class="absolute inset-0 z-0">
+<img loading="lazy" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Sophisticated cinematic composition of clean architectural glass and steel structures with subtle data visualizations and neural network overlays, representing enterprise-scale marketing logic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9Y8x7z6w5v4u3t2s1r0q9p8o7n6m5l4k3j2i1h0g9f8e7d6c5b4a3z2y1x0"/>
+</div>
+<div class="absolute inset-0 bg-black/10 group-hover:bg-white/20 transition-all duration-500 backdrop-blur-0 group-hover:backdrop-blur-md flex items-center justify-center">
+<button class="opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 bg-white text-on-surface px-8 py-3 rounded-lg font-bold text-sm tracking-tight flex items-center gap-2">
+                        View More <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<div class="absolute bottom-0 left-0 p-10 z-10 text-white pointer-events-none">
+<span class="font-label text-[10px] uppercase tracking-widest text-white/70 mb-2 block">Enterprise Scale</span>
+<h3 class="text-3xl font-black editorial-title">B2B Marketing Systems</h3>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Landing Page Shell -->
+<footer class="bg-slate-50 py-16 flex flex-col items-center justify-center gap-8 w-full">
+<div class="flex gap-8">
+<a class="font-label text-[10px] uppercase tracking-widest text-slate-400 hover:text-violet-600 transition-colors" href="#">Terms</a>
+<a class="font-label text-[10px] uppercase tracking-widest text-slate-400 hover:text-violet-600 transition-colors" href="#">Privacy</a>
+<a class="font-label text-[10px] uppercase tracking-widest text-slate-400 hover:text-violet-600 transition-colors" href="https://www.instagram.com/ahmedandai/" target="_blank" rel="noopener noreferrer">Instagram</a>
+<a class="font-label text-[10px] uppercase tracking-widest text-slate-400 hover:text-violet-600 transition-colors" href="#">Vimeo</a>
+</div>
+<div class="font-label text-[10px] uppercase tracking-widest text-slate-400">
+            Â© 2024 Aether AI. Precision in Motion.
+        </div>
+</footer>
+</body></html>
+
+

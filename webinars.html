@@ -1,0 +1,475 @@
+﻿<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Webinar Production & Scripting | Ali Ahmed</title>
+    <meta name="description" content="A curated collection of webinar productions and event scripting. Comprehensive webinar solutions by Ali Ahmed." />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.cdnfonts.com/css/berkeley-mono" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#6b38d4",
+                        "primary-container": "#8455ef",
+                        "secondary": "#006c49",
+                        "background": "#fbf9fa",
+                        "surface": "#fbf9fa",
+                        "on-surface": "#1b1c1d",
+                        "on-surface-variant": "#494454",
+                        "surface-container": "#efedee",
+                        "surface-container-low": "#f5f3f4",
+                        "outline-variant": "#cbc3d7",
+                    },
+                    "borderRadius": {
+                        "xl": "0.75rem",
+                    },
+                    "fontFamily": {
+                        headline: ["Inter", "sans-serif"],
+                        body: ["Inter", "sans-serif"],
+                        mono: ["Fira Code", "monospace"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        h1, h2, h3, h4, .font-headline, body, p, .font-body {
+            font-family: 'Inter', sans-serif;
+        }
+        .berkeley-mono { font-family: 'Berkeley Mono', monospace; }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .glass-tag {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: #ffffff;
+        }
+        .ethereal-shadow {
+            box-shadow: 0 8px 32px 0 rgba(0,0,0,0.04);
+        }
+        .no-line-rule { border: none !important; }
+
+        /* Nav links */
+        .nav-link { position: relative; }
+        .nav-link::after {
+            content: ''; position: absolute; bottom: -4px; left: 0;
+            width: 0; height: 2px;
+            background: linear-gradient(90deg, #6b38d4, #8455ef);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+        .nav-link.active { color: #6b38d4; font-weight: 700; }
+
+        /* Mobile menu */
+        .mobile-menu {
+            transform: translateY(-100%);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .mobile-menu.open { transform: translateY(0); }
+
+        /* Entrance animation */
+        @keyframes luxuryFadeUp {
+            from { opacity: 0; transform: translateY(60px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .luxury-reveal { opacity: 0; will-change: transform, opacity; }
+        .luxury-reveal.active {
+            animation: luxuryFadeUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        /* Webinar card */
+        .webinar-card {
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+        }
+        .webinar-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        /* Editorial title */
+        .editorial-title {
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            letter-spacing: -0.04em;
+        }
+
+        /* Floating particles */
+        @keyframes float-particle {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 0.4; }
+            90% { opacity: 0.4; }
+            50% { transform: translateY(-80px) translateX(20px); }
+        }
+        .floating-particle {
+            position: absolute;
+            width: 3px; height: 3px;
+            border-radius: 50%;
+            background: #6b38d4;
+            pointer-events: none;
+            animation: float-particle var(--duration, 4s) var(--delay, 0s) ease-in-out infinite;
+        }
+
+        /* Cursor glow */
+        #cursor-glow {
+            position: fixed; width: 400px; height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(107,56,212,0.08) 0%, rgba(107,56,212,0.02) 40%, transparent 70%);
+            pointer-events: none; z-index: 0;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s ease; opacity: 0;
+            will-change: transform;
+        }
+        #cursor-glow.active { opacity: 1; }
+
+        /* Card gradient overlay */
+        .card-gradient {
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 50%, transparent 100%);
+        }
+
+        /* Permission Modal */
+        #permission-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        #permission-modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .permission-content {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transform: scale(0.9);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        #permission-modal.active .permission-content {
+            transform: scale(1);
+        }
+    </style>
+
+    </head>
+<body class="bg-background text-on-surface font-body overflow-x-hidden">
+    <div id="cursor-glow"></div>
+
+    <!-- Top Nav -->
+    <nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-6 py-3 rounded-full mt-4 mx-auto w-[90%] max-w-5xl bg-white/60 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(0,0,0,0.04)] no-line-rule transition-all duration-300">
+        <a href="index.html" class="text-lg font-bold tracking-tighter text-slate-900">Ali Ahmed</a>
+        <div class="hidden md:flex items-center gap-8">
+            <a class="nav-link text-slate-600 hover:text-slate-900 font-sans tracking-tight font-medium text-sm transition-all duration-300" href="index.html#work">Work</a>
+            <a class="nav-link active text-slate-900 font-sans tracking-tight font-bold text-sm transition-all duration-300" href="projects.html">Projects</a>
+            <a class="nav-link text-slate-600 hover:text-slate-900 font-sans tracking-tight font-medium text-sm transition-all duration-300" href="index.html#expertise">Expertise</a>
+            <a class="nav-link text-slate-600 hover:text-slate-900 font-sans tracking-tight font-medium text-sm transition-all duration-300" href="index.html#process">Process</a>
+            <a class="nav-link text-slate-600 hover:text-slate-900 font-sans tracking-tight font-medium text-sm transition-all duration-300" href="index.html#experience">Experience</a>
+            <a class="nav-link text-slate-600 hover:text-slate-900 font-sans tracking-tight font-medium text-sm transition-all duration-300" href="index.html#tools">Tools</a>
+            <a class="nav-link text-slate-600 hover:text-slate-900 font-sans tracking-tight font-medium text-sm transition-all duration-300" href="index.html#contact">Contact</a>
+        </div>
+        <button id="mobile-menu-btn" class="md:hidden w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container transition-colors" aria-label="Toggle menu">
+            <span class="material-symbols-outlined">menu</span>
+        </button>
+        <a href="index.html#contact" class="hidden md:inline-block bg-primary hover:opacity-80 text-white px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:scale-105 active:scale-95">Let's Collaborate</a>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu fixed inset-0 z-[60] bg-white/95 backdrop-blur-xl flex flex-col items-center justify-center gap-8 md:hidden">
+        <button id="mobile-menu-close" class="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container transition-colors" aria-label="Close menu">
+            <span class="material-symbols-outlined">close</span>
+        </button>
+        <a class="text-2xl font-bold text-on-surface hover:text-primary transition-colors mobile-nav-link" href="index.html#work">Work</a>
+        <a class="text-2xl font-bold text-on-surface hover:text-primary transition-colors mobile-nav-link" href="projects.html">Projects</a>
+        <a class="text-2xl font-bold text-on-surface hover:text-primary transition-colors mobile-nav-link" href="index.html#expertise">Expertise</a>
+        <a class="text-2xl font-bold text-on-surface hover:text-primary transition-colors mobile-nav-link" href="index.html#process">Process</a>
+        <a class="text-2xl font-bold text-on-surface hover:text-primary transition-colors mobile-nav-link" href="index.html#experience">Experience</a>
+        <a class="text-2xl font-bold text-on-surface hover:text-primary transition-colors mobile-nav-link" href="index.html#tools">Tools</a>
+        <a class="text-2xl font-bold text-on-surface hover:text-primary transition-colors mobile-nav-link" href="index.html#contact">Contact</a>
+        <a href="index.html#contact" class="bg-primary text-white px-8 py-4 rounded-full font-bold text-lg mt-4 hover:opacity-90 transition-all mobile-nav-link">Let's Collaborate</a>
+    </div>
+
+    <!-- Main Content -->
+    <main class="relative pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto overflow-hidden">
+        <div class="floating-particle" style="left: 10%; top: 30%; --duration: 5s; --delay: 0s;"></div>
+        <div class="floating-particle" style="left: 85%; top: 50%; --duration: 6s; --delay: 0.5s;"></div>
+
+        <!-- Page Header -->
+        <header class="mb-20 luxury-reveal">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
+                <div class="max-w-2xl">
+                    <!-- Breadcrumb -->
+                    <a href="projects.html" class="inline-flex items-center gap-1.5 text-[10px] uppercase tracking-[0.2em] text-outline mb-4 hover:text-primary transition-colors font-medium">
+                        <span class="material-symbols-outlined text-sm">arrow_back</span>
+                        Projects / Webinar Production
+                    </a>
+                    <h1 class="text-5xl md:text-7xl font-black editorial-title text-on-surface">Webinar Archive.</h1>
+                    <p class="mt-6 text-lg text-on-surface-variant font-medium leading-relaxed">
+                        A showcase of end-to-end webinar productions and event scripting. From concept to execution, these sessions are designed for deep engagement and authority building.
+                    </p>
+                </div>
+                <div class="flex gap-4 flex-shrink-0">
+                    <span class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant bg-surface-container px-4 py-2 rounded-full">27 Productions</span>
+                    <span class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant bg-surface-container px-4 py-2 rounded-full">Selected Events</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Section divider -->
+        <div class="flex items-center gap-6 mb-12 luxury-reveal">
+            <h2 class="text-xl font-bold uppercase tracking-[0.1em] text-on-surface whitespace-nowrap">PRODUCTIONS & EVENTS</h2>
+            <div class="h-[1px] w-full bg-outline-variant/30"></div>
+        </div>
+
+        <!-- Bento Grid for Webinars -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8" id="webinar-grid">
+            
+            <!-- Hero Webinar (Item 1) -->
+            <div class="lg:col-span-8 group relative h-[580px] overflow-hidden rounded-3xl bg-surface-container-low ethereal-shadow webinar-card luxury-reveal cursor-pointer" onclick="showPermissionModal()">
+                <img loading="lazy" src="https://static.wixstatic.com/media/f361dc_f51aa33b3540486cbdc004a994ff6777~mv2.jpg/v1/fit/w_1080,h_833,q_90,enc_avif,quality_auto/f361dc_f51aa33b3540486cbdc004a994ff6777~mv2.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Webinar 1">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500"></div>
+                <!-- Tag -->
+                <div class="absolute top-6 left-6 z-30">
+                    <span class="glass-tag text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">Live Masterclass</span>
+                </div>
+                <!-- Action Icons -->
+                <div class="absolute top-6 right-6 z-30 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <button class="glass-card p-2.5 rounded-xl text-white hover:bg-white/20 transition-all"><span class="material-symbols-outlined text-xl">lock</span></button>
+                    <button class="glass-card p-2.5 rounded-xl text-white hover:bg-white/20 transition-all"><span class="material-symbols-outlined text-xl">share</span></button>
+                </div>
+                <!-- Hover Info -->
+                <div class="absolute bottom-0 left-0 right-0 p-8 z-10 card-gradient opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <span class="berkeley-mono text-[10px] uppercase tracking-widest text-white/60 block mb-2">Production Design</span>
+                    <h3 class="text-2xl font-black editorial-title text-white mb-1">Strategic Scale Webinar</h3>
+                </div>
+            </div>
+
+            <!-- Webinar 2 (Item 2) -->
+            <div class="lg:col-span-4 group relative h-[580px] lg:aspect-auto lg:h-full overflow-hidden rounded-3xl bg-surface-container-low ethereal-shadow webinar-card luxury-reveal cursor-pointer" onclick="showPermissionModal()">
+                <img loading="lazy" src="https://static.wixstatic.com/media/f361dc_44a69c3cbe084ad5b13c01a770d0abf9~mv2.jpg/v1/fit/w_1080,h_833,q_90,enc_avif,quality_auto/f361dc_44a69c3cbe084ad5b13c01a770d0abf9~mv2.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Webinar 2">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500"></div>
+            </div>
+
+            <!-- Row 2 -->
+            <div class="lg:col-span-4 group relative h-[580px] overflow-hidden rounded-3xl bg-surface-container-low ethereal-shadow webinar-card luxury-reveal cursor-pointer" onclick="showPermissionModal()">
+                <img loading="lazy" src="https://static.wixstatic.com/media/f361dc_0dd4ae3278b149638fb22e027ecfe456~mv2.jpg/v1/fit/w_1080,h_833,q_90,enc_avif,quality_auto/f361dc_0dd4ae3278b149638fb22e027ecfe456~mv2.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Webinar 3">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500"></div>
+            </div>
+            <div class="lg:col-span-4 group relative h-[580px] overflow-hidden rounded-3xl bg-surface-container-low ethereal-shadow webinar-card luxury-reveal cursor-pointer" onclick="showPermissionModal()">
+                <img loading="lazy" src="https://static.wixstatic.com/media/f361dc_615a0230c8f74da7941754001d3f396a~mv2.jpg/v1/fit/w_1080,h_833,q_90,enc_avif,quality_auto/f361dc_615a0230c8f74da7941754001d3f396a~mv2.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Webinar 4">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500"></div>
+            </div>
+            <div class="lg:col-span-4 group relative h-[580px] overflow-hidden rounded-3xl bg-surface-container-low ethereal-shadow webinar-card luxury-reveal cursor-pointer" onclick="showPermissionModal()">
+                <img loading="lazy" src="https://static.wixstatic.com/media/f361dc_125d0aaaa83748c283617e62a81dc91d~mv2.jpg/v1/fit/w_1439,h_833,q_90,enc_avif,quality_auto/f361dc_125d0aaaa83748c283617e62a81dc91d~mv2.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Webinar 5">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500"></div>
+            </div>
+
+            <!-- Row 3 -->
+            <div class="lg:col-span-6 group relative h-[580px] overflow-hidden rounded-3xl bg-surface-container-low ethereal-shadow webinar-card luxury-reveal cursor-pointer" onclick="showPermissionModal()">
+                <img loading="lazy" src="https://static.wixstatic.com/media/f361dc_0a566c1a44454e728bb9e8f0dec475fa~mv2.jpg/v1/fit/w_1439,h_833,q_90,enc_avif,quality_auto/f361dc_0a566c1a44454e728bb9e8f0dec475fa~mv2.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Webinar 6">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500"></div>
+            </div>
+            <div class="lg:col-span-6 group relative h-[580px] overflow-hidden rounded-3xl bg-surface-container-low ethereal-shadow webinar-card luxury-reveal cursor-pointer" onclick="showPermissionModal()">
+                <img loading="lazy" src="https://static.wixstatic.com/media/f361dc_9e4e9f15094c489ca91484281b86de7b~mv2.jpg/v1/fit/w_1281,h_833,q_90,enc_avif,quality_auto/f361dc_9e4e9f15094c489ca91484281b86de7b~mv2.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Webinar 7">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500"></div>
+            </div>
+
+            <!-- Row 4 -->
+            <div class="lg:col-span-3 group relative h-[580px] overflow-hidden rounded-3xl bg-surface-container-low ethereal-shadow webinar-card luxury-reveal cursor-pointer" onclick="showPermissionModal()">
+                <img loading="lazy" src="https://static.wixstatic.com/media/f361dc_e28d230b52794e5dab6aad13fa13441b~mv2.jpg/v1/fit/w_1281,h_833,q_90,enc_avif,quality_auto/f361dc_e28d230b52794e5dab6aad13fa13441b~mv2.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Webinar 8">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500"></div>
+            </div>
+            <div class="lg:col-span-3 group relative h-[580px] overflow-hidden rounded-3xl bg-surface-container-low ethereal-shadow webinar-card luxury-reveal cursor-pointer" onclick="showPermissionModal()">
+                <img loading="lazy" src="https://static.wixstatic.com/media/f361dc_743d3f6467d343f6a11474e4f544d790~mv2.jpg/v1/fit/w_1080,h_833,q_90,enc_avif,quality_auto/f361dc_743d3f6467d343f6a11474e4f544d790~mv2.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Webinar 9">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500"></div>
+            </div>
+            <div class="lg:col-span-3 group relative h-[580px] overflow-hidden rounded-3xl bg-surface-container-low ethereal-shadow webinar-card luxury-reveal cursor-pointer" onclick="showPermissionModal()">
+                <img loading="lazy" src="https://static.wixstatic.com/media/f361dc_cf64259a22814c18abca16c1747fcc5d~mv2.jpg/v1/fit/w_1080,h_833,q_90,enc_avif,quality_auto/f361dc_cf64259a22814c18abca16c1747fcc5d~mv2.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Webinar 10">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500"></div>
+            </div>
+            <div class="lg:col-span-3 group relative h-[580px] overflow-hidden rounded-3xl bg-surface-container-low ethereal-shadow webinar-card luxury-reveal cursor-pointer" onclick="showPermissionModal()">
+                <img loading="lazy" src="https://static.wixstatic.com/media/f361dc_eff69a3c504143009ee545bd92f3fa27~mv2.jpg/v1/fit/w_1080,h_833,q_90,enc_avif,quality_auto/f361dc_eff69a3c504143009ee545bd92f3fa27~mv2.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Webinar 11">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500"></div>
+            </div>
+
+            <!-- Row 5 -->
+            <div class="lg:col-span-4 group relative aspect-[4/3] overflow-hidden rounded-3xl bg-surface-container-low ethereal-shadow webinar-card luxury-reveal cursor-pointer" onclick="showPermissionModal()">
+                <img loading="lazy" src="https://static.wixstatic.com/media/f361dc_248409f3120b4b92bf0a65f6504b28a6~mv2.jpg/v1/fit/w_1080,h_833,q_90,enc_avif,quality_auto/f361dc_248409f3120b4b92bf0a65f6504b28a6~mv2.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Webinar 12">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500"></div>
+            </div>
+            <div class="lg:col-span-4 group relative aspect-[4/3] overflow-hidden rounded-3xl bg-surface-container-low ethereal-shadow webinar-card luxury-reveal cursor-pointer" onclick="showPermissionModal()">
+                <img loading="lazy" src="https://static.wixstatic.com/media/f361dc_ea6ad4dc99d94ef7abefe6d10cb2cf66~mv2.jpg/v1/fit/w_1080,h_833,q_90,enc_avif,quality_auto/f361dc_ea6ad4dc99d94ef7abefe6d10cb2cf66~mv2.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Webinar 13">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500"></div>
+            </div>
+            <div class="lg:col-span-4 group relative aspect-[4/3] overflow-hidden rounded-3xl bg-surface-container-low ethereal-shadow webinar-card luxury-reveal cursor-pointer" onclick="showPermissionModal()">
+                <img loading="lazy" src="https://static.wixstatic.com/media/f361dc_e363f0a425ca4cb6a910b91efa6fada8~mv2.jpg/v1/fit/w_1080,h_833,q_90,enc_avif,quality_auto/f361dc_e363f0a425ca4cb6a910b91efa6fada8~mv2.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Webinar 14">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500"></div>
+            </div>
+
+            <!-- Row 6 -->
+            <div class="lg:col-span-3 group relative h-[580px] overflow-hidden rounded-3xl bg-surface-container-low ethereal-shadow webinar-card luxury-reveal cursor-pointer" onclick="showPermissionModal()">
+                <img loading="lazy" src="https://static.wixstatic.com/media/f361dc_797e81e09a0048f0a3e7b1d35556a596~mv2.jpg/v1/fit/w_1080,h_833,q_90,enc_avif,quality_auto/f361dc_797e81e09a0048f0a3e7b1d35556a596~mv2.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Webinar 15">
+                <div class="absolute inset-0 bg-black/5 group-hover:bg-black/10 transition-all duration-500"></div>
+            </div>
+            <div class="lg:col-span-3 group relative h-[580px] overflow-hidden rounded-3xl bg-surface-container-low ethereal-shadow webinar-card luxury-reveal cursor-pointer" onclick="showPermissionModal()">
+                <img loading="lazy" src="https://static.wixstatic.com/media/f361dc_495d5c5e02b94939b4d425ae03f06b73~mv2.jpg/v1/fit/w_1080,h_833,q_90,enc_avif,quality_auto/f361dc_495d5c5e02b94939b4d425ae03f06b73~mv2.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Webinar 16">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500"></div>
+            </div>
+            <div class="lg:col-span-3 group relative h-[580px] overflow-hidden rounded-3xl bg-surface-container-low ethereal-shadow webinar-card luxury-reveal cursor-pointer" onclick="showPermissionModal()">
+                <img loading="lazy" src="https://static.wixstatic.com/media/f361dc_2416078cc9104c8b88475b0131a6c8ce~mv2.jpg/v1/fit/w_1080,h_833,q_90,enc_avif,quality_auto/f361dc_2416078cc9104c8b88475b0131a6c8ce~mv2.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Webinar 17">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500"></div>
+            </div>
+            <div class="lg:col-span-3 group relative h-[580px] overflow-hidden rounded-3xl bg-surface-container-low ethereal-shadow webinar-card luxury-reveal cursor-pointer" onclick="showPermissionModal()">
+                <img loading="lazy" src="https://static.wixstatic.com/media/f361dc_d6d80ba12930450a9972115dc4b91e5b~mv2.jpg/v1/fit/w_1080,h_833,q_90,enc_avif,quality_auto/f361dc_d6d80ba12930450a9972115dc4b91e5b~mv2.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Webinar 18">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500"></div>
+            </div>
+
+            <!-- Row 7 -->
+            <div class="lg:col-span-4 group relative aspect-[4/3] overflow-hidden rounded-3xl bg-surface-container-low ethereal-shadow webinar-card luxury-reveal cursor-pointer" onclick="showPermissionModal()">
+                <img loading="lazy" src="https://static.wixstatic.com/media/f361dc_b7f6898b8f714e099e800735eeb122e4~mv2.jpg/v1/fit/w_1080,h_833,q_90,enc_avif,quality_auto/f361dc_b7f6898b8f714e099e800735eeb122e4~mv2.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Webinar 19">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500"></div>
+            </div>
+            <div class="lg:col-span-4 group relative aspect-[4/3] overflow-hidden rounded-3xl bg-surface-container-low ethereal-shadow webinar-card luxury-reveal cursor-pointer" onclick="showPermissionModal()">
+                <img loading="lazy" src="https://static.wixstatic.com/media/f361dc_ff36d704fd164fafb0ce49b276d355e2~mv2.jpg/v1/fit/w_1080,h_833,q_90,enc_avif,quality_auto/f361dc_ff36d704fd164fafb0ce49b276d355e2~mv2.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Webinar 20">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500"></div>
+            </div>
+            <div class="lg:col-span-4 group relative aspect-[4/3] overflow-hidden rounded-3xl bg-surface-container-low ethereal-shadow webinar-card luxury-reveal cursor-pointer" onclick="showPermissionModal()">
+                <img loading="lazy" src="https://static.wixstatic.com/media/f361dc_1d999b9197394d9fb1c906fa5336d002~mv2.jpg/v1/fit/w_1080,h_833,q_90,enc_avif,quality_auto/f361dc_1d999b9197394d9fb1c906fa5336d002~mv2.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Webinar 21">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500"></div>
+            </div>
+
+            <!-- Row 8 -->
+            <div class="lg:col-span-3 group relative h-[580px] overflow-hidden rounded-3xl bg-surface-container-low ethereal-shadow webinar-card luxury-reveal cursor-pointer" onclick="showPermissionModal()">
+                <img loading="lazy" src="https://static.wixstatic.com/media/f361dc_930bfe096b844d48b2eb21c556a464ef~mv2.jpg/v1/fit/w_1080,h_833,q_90,enc_avif,quality_auto/f361dc_930bfe096b844d48b2eb21c556a464ef~mv2.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Webinar 22">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500"></div>
+            </div>
+            <div class="lg:col-span-3 group relative h-[580px] overflow-hidden rounded-3xl bg-surface-container-low ethereal-shadow webinar-card luxury-reveal cursor-pointer" onclick="showPermissionModal()">
+                <img loading="lazy" src="https://static.wixstatic.com/media/f361dc_4970c36a40f0492bb15a46472cd9d131~mv2.jpg/v1/fit/w_1080,h_833,q_90,enc_avif,quality_auto/f361dc_4970c36a40f0492bb15a46472cd9d131~mv2.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Webinar 23">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500"></div>
+            </div>
+            <div class="lg:col-span-3 group relative h-[580px] overflow-hidden rounded-3xl bg-surface-container-low ethereal-shadow webinar-card luxury-reveal cursor-pointer" onclick="showPermissionModal()">
+                <img loading="lazy" src="https://static.wixstatic.com/media/f361dc_67bed9f0ac004f7b811801217dd31894~mv2.jpg/v1/fit/w_1080,h_833,q_90,enc_avif,quality_auto/f361dc_67bed9f0ac004f7b811801217dd31894~mv2.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Webinar 24">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500"></div>
+            </div>
+            <div class="lg:col-span-3 group relative h-[580px] overflow-hidden rounded-3xl bg-surface-container-low ethereal-shadow webinar-card luxury-reveal cursor-pointer" onclick="showPermissionModal()">
+                <img loading="lazy" src="https://static.wixstatic.com/media/f361dc_9b69c4a5198d4f99a4964d1e1df39b5f~mv2.jpg/v1/fit/w_1080,h_833,q_90,enc_avif,quality_auto/f361dc_9b69c4a5198d4f99a4964d1e1df39b5f~mv2.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Webinar 25">
+                <div class="absolute inset-0 bg-black/5 group-hover:bg-black/10 transition-all duration-500"></div>
+            </div>
+
+            <!-- Row 9 -->
+            <div class="lg:col-span-6 group relative h-[580px] overflow-hidden rounded-3xl bg-surface-container-low ethereal-shadow webinar-card luxury-reveal cursor-pointer" onclick="showPermissionModal()">
+                <img loading="lazy" src="https://static.wixstatic.com/media/f361dc_fee2934033ad4028901e1db9426ea975~mv2.jpg/v1/fit/w_1080,h_833,q_90,enc_avif,quality_auto/f361dc_fee2934033ad4028901e1db9426ea975~mv2.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Webinar 26">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500"></div>
+            </div>
+            <div class="lg:col-span-6 group relative h-[580px] overflow-hidden rounded-3xl bg-surface-container-low ethereal-shadow webinar-card luxury-reveal cursor-pointer" onclick="showPermissionModal()">
+                <img loading="lazy" src="https://static.wixstatic.com/media/f361dc_519c00c2f6cc4f438b6d670a9a184de3~mv2.jpg/v1/fit/w_1080,h_833,q_90,enc_avif,quality_auto/f361dc_519c00c2f6cc4f438b6d670a9a184de3~mv2.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Webinar 27">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500"></div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-50 py-12 px-8 no-line-rule mt-24">
+        <div class="flex flex-col md:flex-row justify-between items-center w-full max-w-7xl mx-auto px-8 md:px-12 lg:px-20">
+            <div class="mb-8 md:mb-0">
+                <div class="text-sm font-black text-slate-900 mb-2">Ali Ahmed</div>
+                <p class="font-mono text-[10px] uppercase tracking-widest text-slate-500">Â© 2024 Ali Ahmed. Built with intentionality.</p>
+            </div>
+            <div class="flex gap-8">
+                <a class="font-mono text-[10px] uppercase tracking-widest text-slate-500 hover:text-slate-900 hover:translate-y-[-2px] transition-all duration-300" href="https://www.linkedin.com/in/aliahmeddigital/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a class="font-mono text-[10px] uppercase tracking-widest text-slate-500 hover:text-slate-900 hover:translate-y-[-2px] transition-all duration-300" href="https://www.instagram.com/ahmedandai/" target="_blank" rel="noopener noreferrer">Instagram</a>
+                <a class="font-mono text-[10px] uppercase tracking-widest text-slate-500 hover:text-slate-900 hover:translate-y-[-2px] transition-all duration-300" href="projects.html">Projects</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Permission Modal -->
+    <div id="permission-modal">
+        <div class="absolute inset-0 bg-white/40 backdrop-blur-2xl" onclick="hidePermissionModal()"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-6">
+            <div class="permission-content max-w-lg w-full p-12 rounded-[2rem] shadow-[0_32px_64px_rgba(0,0,0,0.1)] text-center relative">
+                <button onclick="hidePermissionModal()" class="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 transition-colors">
+                    <span class="material-symbols-outlined text-sm">close</span>
+                </button>
+                <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-8">
+                    <span class="material-symbols-outlined text-primary text-3xl">lock</span>
+                </div>
+                <h2 class="text-3xl font-black editorial-title text-on-surface mb-4">Confidential Production</h2>
+                <p class="text-on-surface-variant font-medium leading-relaxed mb-8">
+                    Full webinar recordings and event scripts cannot be disclosed at this time because of client permission issues and non-disclosure agreements.
+                </p>
+                <button onclick="hidePermissionModal()" class="bg-primary text-white px-8 py-4 rounded-full font-bold tracking-tight hover:opacity-90 transition-all active:scale-95">
+                    Understood
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.showPermissionModal = () => {
+            document.getElementById('permission-modal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        };
+
+        window.hidePermissionModal = () => {
+            document.getElementById('permission-modal').classList.remove('active');
+            document.body.style.overflow = '';
+        };
+
+        (function() {
+            const els = document.querySelectorAll('.luxury-reveal');
+            let queue = [], processing = false;
+            const process = () => {
+                if (!queue.length) { processing = false; return; }
+                processing = true;
+                queue.shift().classList.add('active');
+                setTimeout(process, 100);
+            };
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !entry.target.classList.contains('active')) {
+                        if (!queue.includes(entry.target)) { queue.push(entry.target); if (!processing) process(); }
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+            els.forEach(el => observer.observe(el));
+        })();
+
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+        if (mobileMenuBtn && mobileMenu) mobileMenuBtn.addEventListener('click', () => { mobileMenu.classList.add('open'); document.body.style.overflow = 'hidden'; });
+        if (mobileMenuClose && mobileMenu) {
+            const close = () => { mobileMenu.classList.remove('open'); document.body.style.overflow = ''; };
+            mobileMenuClose.addEventListener('click', close);
+            mobileNavLinks.forEach(l => l.addEventListener('click', close));
+        }
+
+        const cursorGlow = document.getElementById('cursor-glow');
+        if (cursorGlow) {
+            let mX = 0, mY = 0, gX = 0, gY = 0;
+            document.addEventListener('mousemove', e => { mX = e.clientX; mY = e.clientY; cursorGlow.classList.add('active'); });
+            let lastGX = -1, lastGY = -1; const tick = () => { let dX = mX - gX; let dY = mY - gY; if (Math.abs(dX) > 0.1 || Math.abs(dY) > 0.1) { gX += dX * 0.1; gY += dY * 0.1; let roundedX = Math.round(gX * 10) / 10; let roundedY = Math.round(gY * 10) / 10; if (roundedX !== lastGX || roundedY !== lastGY) { cursorGlow.style.transform = `translate3d(calc(${roundedX}px - 50%), calc(${roundedY}px - 50%), 0)`; lastGX = roundedX; lastGY = roundedY; } } requestAnimationFrame(tick); };
+            tick();
+        }
+    </script>
+</body>
+</html>
+
+
